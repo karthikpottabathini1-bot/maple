@@ -47,7 +47,7 @@ export default function FinalCTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mx-auto mt-6 max-w-xl text-lg text-white/70"
+              className="mx-auto mt-6 max-w-xl text-lg text-white/90"
             >
               Free to start. No account needed. On every desktop.
             </motion.p>
@@ -67,12 +67,12 @@ export default function FinalCTA() {
                 Download for macOS
               </a>
 
-              <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/50">
-                <span className="font-medium text-white/70">
+              <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/70">
+                <span className="font-medium text-white/90">
                   Available for Linux
                 </span>
-                <span className="text-white/30">·</span>
-                <span className="font-medium text-white/50">
+                <span className="text-white/40">·</span>
+                <span className="font-medium text-white/70">
                   Coming soon for Windows
                 </span>
               </div>
@@ -83,7 +83,7 @@ export default function FinalCTA() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-8 text-sm text-white/40"
+              className="mt-8 text-sm text-white/60"
             >
               38 MB &middot; Universal &middot; Apple Silicon
             </motion.p>

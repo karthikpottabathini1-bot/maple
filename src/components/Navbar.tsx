@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4">
-        <nav className="flex items-center gap-6 rounded-full px-5 py-3 bg-white/70 backdrop-blur-2xl border border-white/60 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.03)]">
+        <nav className={`flex items-center gap-6 rounded-full px-5 py-3 bg-white/70 backdrop-blur-2xl border transition-shadow duration-300 ${scrolled ? "border-warm-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.06),0_8px_24px_rgba(0,0,0,0.06)]" : "border-white/60 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.03)]"}`}>
           <a href="/" className="flex items-center shrink-0" aria-label="maple home">
             <img src="/maple-wordmark.png" alt="maple" className="h-10 w-auto" />
           </a>
