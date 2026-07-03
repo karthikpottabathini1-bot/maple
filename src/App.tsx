@@ -5,7 +5,7 @@ import LogoTicker from "./components/LogoTicker";
 import BeforeAfter from "./components/BeforeAfter";
 import HowItWorks from "./components/HowItWorks";
 import Features from "./components/Features";
-import DemoVideo from "./components/DemoVideo";
+import AutoEdits from "./components/AutoEdits";
 import Pricing from "./components/Pricing";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
@@ -35,7 +35,7 @@ export default function App() {
         <HowItWorks />
         <Divider />
         <Features />
-        <DemoVideo />
+        <AutoEdits />
         <Pricing />
         <FinalCTA />
         <Footer />
