@@ -303,9 +303,8 @@ export default function HeroForge() {
                   initial={{ opacity: 0, x: 12, scale: 0.9 }}
                   animate={{ opacity: 1, x: 0, scale: 1 }}
                   transition={{ delay: 0.3, duration: 0.35 }}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-rose-50 border border-rose-200/60 px-2.5 py-1 text-[11px] font-semibold text-rose-600"
+                  className="glass inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-medium text-warm-600"
                 >
-                  <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14" /></svg>
                   Removed {ex.removals.length} filler{ex.removals.length > 1 ? "s" : ""}
                 </motion.span>
               )}
@@ -314,9 +313,8 @@ export default function HeroForge() {
                   initial={{ opacity: 0, x: 12, scale: 0.9 }}
                   animate={{ opacity: 1, x: 0, scale: 1 }}
                   transition={{ delay: 0.45, duration: 0.35 }}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200/60 px-2.5 py-1 text-[11px] font-semibold text-amber-700"
+                  className="glass inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-medium text-warm-600"
                 >
-                  <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M12 3v13M12 21h.01" /></svg>
                   Added punctuation
                 </motion.span>
               )}

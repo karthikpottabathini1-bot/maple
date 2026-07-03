@@ -245,12 +245,12 @@ export default function AutoEdits() {
                     .filter(([_, t]) => t === "remove")
                     .slice(0, 1)
                     .map((_, i) => (
-                      <span key={i} className="text-[11px] text-rose-600 font-medium bg-rose-50 px-2 py-0.5 rounded-full">
+                      <span key={i} className="glass inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-medium text-warm-600">
                         {ex.edits.filter(([_, t]) => t === "remove").length} fillers removed
                       </span>
                     ))}
                   {ex.edits.some(([_, t]) => t === "punct") && (
-                    <span className="text-[11px] text-amber-600 font-medium bg-amber-50 px-2 py-0.5 rounded-full">
+                    <span className="glass inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-medium text-warm-600">
                       punctuation added
                     </span>
                   )}
