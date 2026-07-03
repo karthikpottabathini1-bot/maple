@@ -107,7 +107,7 @@ export default function HowItWorks() {
               className="mt-8 space-y-4"
             >
               {[
-                { k: "Option + Control", v: "Global shortcut from any app" },
+                { k: "fn key", v: "Global shortcut from any app" },
                 { k: "< 1 second", v: "Latency from speech to text" },
                 { k: "Zero setup", v: "No account, no config, just works" },
               ].map(({ k, v }) => (
@@ -130,9 +130,7 @@ export default function HowItWorks() {
           >
             {/* Keycaps */}
             <div className="flex items-center gap-2.5">
-              <Keycap label="option" sym="⌥" pressed={pressed} />
-              <span className="text-warm-300 text-sm font-medium">+</span>
-              <Keycap label="control" sym="⌃" pressed={pressed} />
+              <Keycap label="fn" sym="fn" pressed={pressed} />
             </div>
 
             {/* Glow ring when pressed */}
@@ -191,7 +189,7 @@ export default function HowItWorks() {
                         <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M5 12l4.5 4.5L19 6" />
                         </svg>
-                        Polished
+                        {displayed.length === 0 ? "Listening…" : "Polished"}
                       </div>
                       <span className="text-xs text-warm-400 tabular-nums">
                         {displayed.split(" ").filter(Boolean).length} words

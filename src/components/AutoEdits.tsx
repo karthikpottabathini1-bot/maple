@@ -13,23 +13,24 @@ const EXAMPLES: Example[] = [
     polished: "We should circle back before the sprint ends.",
     edits: [
       [0, "remove", "filler"], [1, "remove", "filler"], [2, "remove", "filler"],
-      [10, "remove", "filler"], [9, "punct", "period"],
+      [11, "remove", "filler"], [10, "punct", "."],
     ],
   },
   {
     raw: "like can we ship the redesign maybe before friday i mean",
     polished: "Can we ship the redesign before Friday?",
     edits: [
-      [0, "remove", "filler"], [5, "remove", "filler"], [8, "remove", "filler"],
-      [7, "fix", "capitalization"], [7, "punct", "question mark"],
+      [0, "remove", "filler"], [6, "remove", "filler"], [9, "remove", "filler"],
+      [10, "remove", "filler"], [1, "fix", "capitalization"],
+      [8, "fix", "capitalization"], [8, "punct", "?"],
     ],
   },
   {
     raw: "uh let me write up the release notes real quick um honestly",
     polished: "Let me write up the release notes.",
     edits: [
-      [0, "remove", "filler"], [7, "remove", "filler"], [8, "remove", "filler"],
-      [10, "remove", "filler"], [9, "punct", "period"],
+      [0, "remove", "filler"], [8, "remove", "filler"], [9, "remove", "filler"],
+      [10, "remove", "filler"], [11, "remove", "filler"], [7, "punct", "."],
     ],
   },
 ];
@@ -60,14 +61,11 @@ export default function AutoEdits() {
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const panelRef = useRef<HTMLDivElement>(null);
   const sparkId = useRef(0);
-  const cycleLock = useRef(false);
 
   const ex = EXAMPLES[exIdx];
   const rawWords = ex.raw.split(" ");
 
   const run = useCallback(() => {
-    if (cycleLock.current) return;
-    cycleLock.current = true;
     timers.current.forEach(clearTimeout);
     timers.current = [];
     setPhase("typing");
@@ -104,7 +102,6 @@ export default function AutoEdits() {
             const t3 = setTimeout(() => {
               setPhase("hold");
               const t4 = setTimeout(() => {
-                cycleLock.current = false;
                 setExIdx((p) => (p + 1) % EXAMPLES.length);
               }, 2600);
               timers.current.push(t4);
@@ -117,7 +114,7 @@ export default function AutoEdits() {
       }
     }, 22);
     return () => clearInterval(iv);
-  }, [ex]);
+  }, [exIdx]);
 
   useEffect(() => {
     const c = run();
@@ -207,7 +204,7 @@ export default function AutoEdits() {
                       const removing = isRemoved(i);
                       const punct = hasPunct(i);
                       return (
-                        <span key={i} className="relative inline-block">
+                        <span key={i}>
                           <motion.span
                             ref={(el) => { wordRefs.current[i] = el; }}
                             animate={{
@@ -215,21 +212,21 @@ export default function AutoEdits() {
                               color: removing && edited ? "#ea580c" : "#78716c",
                             }}
                             transition={{ duration: 0.3 }}
-                            className={`inline ${removing && edited ? "line-through decoration-amber-500 decoration-2" : ""}`}
+                            className={`${removing && edited ? "line-through decoration-amber-500 decoration-2" : ""}`}
                           >
                             {word}
                           </motion.span>
-                          {punct && edited && (
+                           {punct && edited && (
                             <motion.span
                               initial={{ opacity: 0, scale: 0.3 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
                               className="text-amber-600 font-bold"
                             >
-                              .
+                              {ex.edits.find(([wi, t]) => wi === i && t === "punct")?.[2] ?? "."}
                             </motion.span>
                           )}
-                          <span> </span>
+                          {i < rawWords.length - 1 ? " " : ""}
                         </span>
                       );
                     })}
@@ -312,10 +309,14 @@ export default function AutoEdits() {
                 <button
                   key={i}
                   onClick={() => setExIdx(i)}
-                  className={`rounded-full transition-all duration-300 ${
-                    i === exIdx ? "h-1.5 w-7 bg-amber-500" : "h-1.5 w-1.5 bg-warm-300 hover:bg-warm-400"
-                  }`}
-                />
+                  className="h-6 w-8 flex items-center justify-center"
+                >
+                  <div
+                    className={`rounded-full transition-all duration-300 ${
+                      i === exIdx ? "h-1.5 w-7 bg-amber-500" : "h-1.5 w-1.5 bg-warm-300"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </div>

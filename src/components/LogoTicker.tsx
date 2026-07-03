@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const COL_1 = [
   "682fa15acc46e85b4628dac4_66f905a26976f830c4f09ce0_66f68e1716301fe5fbcaf913_arc.avif",
@@ -58,8 +59,12 @@ const COLUMNS = [
 ];
 
 export default function LogoTicker() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { margin: "-100px" });
+  const animationPlayState = isInView ? "running" : "paused";
+
   return (
-    <section className="py-20 relative z-10">
+    <section ref={sectionRef} className="py-20 relative z-10">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
           {/* Left: logo marquee */}
@@ -87,6 +92,7 @@ export default function LogoTicker() {
                   className="flex flex-col gap-4 sm:gap-5 lg:gap-6"
                   style={{
                     animation: `${col.dir === "up" ? "marquee-up" : "marquee-down"} ${col.speed} linear infinite`,
+                    animationPlayState,
                   }}
                 >
                   {[...col.logos, ...col.logos].map((logo, i) => (

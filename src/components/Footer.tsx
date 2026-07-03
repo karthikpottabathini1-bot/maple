@@ -20,7 +20,7 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-warm-900">Connect</h4>
             <ul className="mt-4 space-y-3 text-sm text-warm-500">
-              <li><a href="#" className="transition-colors hover:text-warm-900">Twitter</a></li>
+              <li><a href="#" className="transition-colors hover:text-warm-900">X</a></li>
               <li><a href="#" className="transition-colors hover:text-warm-900">GitHub</a></li>
             </ul>
           </div>

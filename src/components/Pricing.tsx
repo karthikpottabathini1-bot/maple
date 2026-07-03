@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const FREE = ["On-device transcription","Cloud formatting included","macOS, Windows & Linux"];
+const FREE = ["On-device transcription","Cloud formatting included","macOS & Linux","Windows support coming soon"];
 const PRO  = ["Everything in Free","Unlimited transcription & formatting","Custom vocabulary","Priority AI models","30-day free trial"];
 
 export default function Pricing() {
