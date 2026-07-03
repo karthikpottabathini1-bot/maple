@@ -5,34 +5,46 @@ interface Example {
   raw: string;
   polished: string;
   edits: Array<[number, "remove" | "punct" | "fix" | "restructure", string]>;
+  bullets?: string[];
 }
 
 const EXAMPLES: Example[] = [
   {
-    raw: "um so like we should circle back before the sprint ends uh",
-    polished: "We should circle back before the sprint ends.",
+    raw: "um, let's run the sim simulation again before the demo.",
+    polished: "Let's run the simulation again before the demo.",
     edits: [
-      [0, "remove", "filler"], [1, "remove", "filler"], [2, "remove", "filler"],
-      [11, "remove", "filler"], [10, "punct", "."],
+      [0, "remove", "filler"],
+      [4, "remove", "filler"],
     ],
   },
   {
-    raw: "like can we ship the redesign maybe before friday i mean",
-    polished: "Can we ship the redesign before Friday?",
+    raw: "let's meet at Ocala Café \u2014 you know what, let's do Cloud's Café.",
+    polished: "Let's meet at Cloud's Café.",
     edits: [
-      [0, "remove", "filler"], [6, "remove", "filler"], [9, "remove", "filler"],
-      [10, "remove", "filler"], [1, "fix", "capitalization"],
-      [8, "fix", "capitalization"], [8, "punct", "?"],
+      [3, "remove", "rephrase"],
+      [4, "remove", "rephrase"],
+      [5, "remove", "rephrase"],
+      [6, "remove", "rephrase"],
+      [7, "remove", "rephrase"],
+      [8, "remove", "rephrase"],
+      [0, "fix", "capitalization"],
     ],
   },
   {
-    raw: "uh let me write up the release notes real quick um honestly",
-    polished: "Let me write up the release notes.",
+    raw: "for the launch we need to, um, finish the docs, record the demo, and email the beta list.",
+    polished: "For the launch:",
+    bullets: ["Finish the docs", "Record the demo", "Email the beta list"],
     edits: [
-      [0, "remove", "filler"], [8, "remove", "filler"], [9, "remove", "filler"],
-      [10, "remove", "filler"], [11, "remove", "filler"], [7, "punct", "."],
+      [6, "remove", "filler"],
+      [0, "fix", "capitalization"],
     ],
   },
+];
+
+const USE_CASES = [
+  { title: "Takes out filler words", desc: "Removes 'um', 'like', 'you know' and conversational filler automatically." },
+  { title: "Redoes sentences intelligently", desc: "Rephrases clumsy speech into clear, natural-sounding prose." },
+  { title: "Bullet point formatting", desc: "Detects lists and restructures them into scannable bullet points." },
 ];
 
 function Sparkle({ x, y }: { x: number; y: number }) {
@@ -149,6 +161,31 @@ export default function AutoEdits() {
           </motion.p>
         </div>
 
+        {/* Use case cards */}
+        <div className="mb-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {USE_CASES.map((uc, i) => (
+            <motion.button
+              key={i}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.35, delay: 0.1 + i * 0.06 }}
+              onClick={() => setExIdx(i)}
+              className={`glass rounded-xl p-4 text-left transition-all duration-300 ${
+                i === exIdx
+                  ? "ring-2 ring-amber-500/40 shadow-[0_4px_16px_rgba(249,115,22,0.1)]"
+                  : "hover:bg-white/70"
+              }`}
+            >
+              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-amber-500 text-white text-xs font-bold tabular-nums">
+                {i + 1}
+              </span>
+              <h3 className="mt-2.5 text-sm font-semibold text-warm-800">{uc.title}</h3>
+              <p className="mt-1 text-xs leading-[1.5] text-warm-400">{uc.desc}</p>
+            </motion.button>
+          ))}
+        </div>
+
         {/* Comparison card */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -178,7 +215,7 @@ export default function AutoEdits() {
                 </div>
               )}
               <span className="text-xs font-medium text-warm-400 tabular-nums">
-                {phase === "typing" ? "Listening…" : phase === "editing" ? `Editing… ${editedIndices.size}/${ex.edits.length}` : "Polished"}
+                {phase === "typing" ? "Listening\u2026" : phase === "editing" ? `Editing\u2026 ${editedIndices.size}/${ex.edits.length}` : "Polished"}
               </span>
             </div>
           </div>
@@ -254,6 +291,11 @@ export default function AutoEdits() {
                       punctuation added
                     </span>
                   )}
+                  {ex.bullets && (
+                    <span className="glass inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-medium text-warm-600">
+                      formatted as bullets
+                    </span>
+                  )}
                 </motion.div>
               ) : null}
             </div>
@@ -267,19 +309,28 @@ export default function AutoEdits() {
               <div className="text-[1.15rem] md:text-[1.25rem] leading-[1.8]">
                 <AnimatePresence mode="wait">
                   {showResult || phase === "hold" ? (
-                    <motion.span
+                    <motion.div
                       key={`p-${exIdx}`}
                       initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
-                      className="text-warm-900 font-semibold"
                     >
-                      {ex.polished}
-                    </motion.span>
+                      <span className="text-warm-900 font-semibold">{ex.polished}</span>
+                      {ex.bullets && (
+                        <ul className="mt-3 space-y-1.5 text-[1.05rem]">
+                          {ex.bullets.map((b, i) => (
+                            <li key={i} className="flex items-start gap-2.5">
+                              <span className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" aria-hidden="true" />
+                              <span className="text-warm-700">{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </motion.div>
                   ) : (
                     <motion.span key="waiting" initial={{ opacity: 0 }} animate={{ opacity: 0.35 }} className="text-warm-400 italic">
-                      Waiting for transcript…
+                      Waiting for transcript\u2026
                     </motion.span>
                   )}
                 </AnimatePresence>
@@ -292,7 +343,7 @@ export default function AutoEdits() {
                   className="mt-4 flex items-center gap-2 text-xs text-warm-400"
                 >
                   <span className="tabular-nums">{ex.polished.split(" ").length} words</span>
-                  <span className="text-warm-300">·</span>
+                  <span className="text-warm-300">\u00b7</span>
                   <span className="text-amber-600 font-medium tabular-nums">
                     -{rawWords.length - ex.polished.split(" ").length} words
                   </span>
