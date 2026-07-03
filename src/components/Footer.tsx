@@ -1,21 +1,33 @@
 export default function Footer() {
   return (
     <footer className="border-t border-warm-200 relative z-10">
-      <div className="mx-auto flex max-w-6xl flex-col gap-7 px-6 py-16 sm:flex-row sm:items-center sm:justify-between">
-        <div className="max-w-xs">
-          <img src="/maple-wordmark.png" alt="maple" className="h-9 w-auto" />
-          <p className="mt-3 text-sm leading-relaxed text-warm-400">
-            On-device dictation for people who&apos;d rather talk than type.
-          </p>
+      <div className="mx-auto max-w-6xl px-6 py-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
+          <div className="col-span-2">
+            <img src="/maple-wordmark.png" alt="maple" className="h-8 w-auto" />
+            <p className="mt-4 text-sm leading-relaxed text-warm-400 max-w-xs">
+              On-device dictation for people who'd rather talk than type.
+            </p>
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold text-warm-900">Product</h4>
+            <ul className="mt-4 space-y-3 text-sm text-warm-500">
+              <li><a href="#how" className="transition-colors hover:text-warm-900">How it works</a></li>
+              <li><a href="#pricing" className="transition-colors hover:text-warm-900">Pricing</a></li>
+              <li><a href="#download" className="transition-colors hover:text-warm-900">Download</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold text-warm-900">Connect</h4>
+            <ul className="mt-4 space-y-3 text-sm text-warm-500">
+              <li><a href="#" className="transition-colors hover:text-warm-900">Twitter</a></li>
+              <li><a href="#" className="transition-colors hover:text-warm-900">GitHub</a></li>
+            </ul>
+          </div>
         </div>
-        <div className="flex items-center gap-8 text-sm font-medium text-warm-500">
-          <a href="#" className="transition-colors hover:text-warm-900">Download</a>
-          <a href="#" className="transition-colors hover:text-warm-900">Twitter</a>
-          <a href="#" className="transition-colors hover:text-warm-900">GitHub</a>
+        <div className="mt-12 pt-8 border-t border-warm-200">
+          <p className="text-sm text-warm-400">&copy; 2026 maple. All rights reserved.</p>
         </div>
-      </div>
-      <div className="mx-auto max-w-6xl border-t border-warm-200 px-6 py-7">
-        <p className="text-sm text-warm-400">&copy; 2026 maple</p>
       </div>
     </footer>
   );

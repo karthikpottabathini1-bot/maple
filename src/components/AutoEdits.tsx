@@ -234,8 +234,8 @@ export default function AutoEdits() {
         {/* Header */}
         <div className="text-center mb-16">
           <motion.div
-            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-3 mb-5"
@@ -269,11 +269,11 @@ export default function AutoEdits() {
 
         {/* Main comparison card */}
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="glass rounded-2xl overflow-hidden"
+          className="card-solid rounded-2xl overflow-hidden"
         >
           {/* Toolbar */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-warm-200/50 bg-white/40">

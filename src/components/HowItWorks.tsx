@@ -79,8 +79,8 @@ export default function HowItWorks() {
           {/* Left: text */}
           <div className="pt-0">
             <motion.h2
-              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6 }}
               className="font-display text-[clamp(2rem,4vw,3.4rem)] font-bold leading-[1.05] tracking-[-0.025em] text-warm-900"
@@ -160,7 +160,7 @@ export default function HowItWorks() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
                     transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-                    className="glass rounded-2xl overflow-hidden shadow-[0_2px_20px_rgba(249,115,22,0.1),inset_0_1px_0_rgba(255,255,255,0.8)]"
+                    className="card-solid rounded-2xl overflow-hidden"
                   >
                     {/* Header */}
                     <div className="flex items-center gap-2.5 border-b border-warm-200/50 bg-white/30 px-4 py-3">
